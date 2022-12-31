@@ -8,28 +8,36 @@
         :book='book'
       >{{book.title}}:{{book.author}}</book-item>
     </ul>
+    <book-form @addBook='appendBook'></book-form>
   </div>
 </template>
 
 <script>
 import BookItem from './BookItem';
+import BookForm from './BookForm';
 
-  export default {
-    components: {
-      BookItem,
+export default {
+  name: 'BookList',
+  data() {
+    return {
+      title: "All Books",
+      books: [
+        {title: 'Self-Reliance', author: 'Ralph Waldo Emerson'},
+        {title: 'American Gods', author: 'Neil Gaiman'},
+        {title: 'Amusing Ourselves to Death', author: 'Neil Postman'},
+      ]
+    }
+  },
+  components: {
+    BookItem,
+    BookForm,
+  },
+  methods: {
+    appendBook(bookTitle, bookAuthor) {
+      this.books.push({ title: bookTitle, author: bookAuthor });
     },
-    name: 'BookList',
-    data() {
-      return {
-        title: "All Books",
-        books: [
-          {title: 'Self-Reliance', author: 'Ralph Waldo Emerson'},
-          {title: 'American Gods', author: 'Neil Gaiman'},
-          {title: 'Amusing Ourselves to Death', author: 'Neil Postman'},
-        ]
-      }
-    },
-  }
+  },
+}
 </script>
 
 <style scoped>
